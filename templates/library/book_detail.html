@@ -1,0 +1,41 @@
+{% extends 'home.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{book.title}}</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{{book.image.url}}" class="card-img-top" alt="image">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <h5 class="card-title"><strong>Title:</strong> {{book.title}}</h5>
+                        <p class="card-text"><strong>Desription:</strong> {{book.description}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Price:</strong> {{book.price}}</li>
+                        <li class="list-group-item"><strong>Count:</strong> {{book.count}}</li>
+                    </ul>
+                </div>
+                <a href="{% url 'book_update_page' book.id %}" class="btn btn-warning mt-3">Update</a>
+                <a href="{% url 'book_delete_page' book.id %}" class="btn btn-danger mt-3">Delete</a>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
+{% endblock %}

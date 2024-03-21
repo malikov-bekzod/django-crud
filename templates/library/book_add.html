@@ -1,0 +1,45 @@
+{% extends 'home.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <form class="row" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="col-md-6 mx-auto">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <h5 class="card-title"><strong>Title:</strong> <input name="title" class="form-control" type="text"></h5>
+                            <p class="card-text"><strong>Desription:</strong> <input name="description"  class="form-control" type="text">
+                            </p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Price:</strong> <input  name="price" class="form-control" type="text">
+                            </li>
+                            <li class="list-group-item"><strong>Count:</strong> <input  name="count" class="form-control" type="text">
+                            </li>
+                            <li class="list-group-item"><strong>Image:</strong> <input  name="image"
+                                    class=" btn btn-warning form-control" type="file"></li>
+                        </ul>
+                    </div>
+                    <button type="submit" class="btn btn-warning mt-3">Create</button>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
+{% endblock %}

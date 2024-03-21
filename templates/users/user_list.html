@@ -1,0 +1,93 @@
+{% extends 'home.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <style>
+        p {
+            font-size: 1.5em;
+            color: #808080;
+            /* Grayish color */
+        }
+
+        i {
+            color: #3e3e3e
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row d-flex mb-3">
+            <div class="col-md-6">
+
+                <h1><a class="text-warning nav-link" href="{% url 'users-page' %}">Users:</a></h1>
+                <a href="{% url 'add_user' %}" class="btn btn-warning">Add new user</a>
+
+            </div>
+            <div class="col-md-6">
+
+                <form class="d-flex" action="" method="get">
+                    <input class="form-control me-2" type="text" name="search" value="{{search}}"
+                        placeholder="Search for user">
+                    <button class="btn btn-warning" type="submit">Search</button>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="row">
+
+            {% if users %}
+
+            
+                {% for user in users %}
+                <div class="col-md-3 mb-3">
+                
+                    <a href="{% url 'user-detail' user.id %}" style="text-decoration: none;">
+                        <div class="card bg-light border-2">
+                            <img src="{{user.image.url}}" class="card-img-top" alt="image">
+                            <div class="card-body  text-dark">
+                                <h6 class="card-title mb-3"><strong>First Name:</strong> {{user.first_name}}</h6>
+                                <h6 class="card-title text-dark"><strong>Last Name:</strong> {{user.last_name}}</h6>
+                            </div>
+                            <ul class="list-group  list-group-flush">
+                                <li class="list-group-item bg-light"><strong>Email:</strong> {{user.email}}</li>
+                                <li class="list-group-item bg-light"><strong>Username:</strong> {{user.username}}</li>
+                                <li class="list-group-item bg-light"><strong>Password:</strong> ********</li>
+                            </ul>
+                            <div class="card-body ">
+                                <a href="{% url 'user-settings' user.id %}" class="btn btn-warning">Update</a>
+                                <a href="{% url 'delete_user' user.id %}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                {% endfor %}
+
+            {% else %}
+
+            <div>
+                <p>Sorry, nothing was found for <b><i>{{search}}</i></b>.</p>
+            </div>
+
+            {% endif %}
+            <br><br>
+            <h3><a href="{% url 'home_page_name' %}">back to profile</a></h3>
+
+        </div>
+
+
+    </div>
+</body>
+
+</html>
+{% endblock %}
+
+
+

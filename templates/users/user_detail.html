@@ -1,0 +1,42 @@
+{% extends 'home.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{user.first_name}}</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+    
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{{user.image.url}}" class="card-img-top" alt="image">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <h5 class="card-title"><strong>First_name:</strong> {{user.first_name}}</h5>
+                        <p class="card-text"><strong>Last name:</strong> {{user.last_name}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Email:</strong> {{user.email}}</li>
+                        <li class="list-group-item"><strong>Username:</strong> {{user.username}}</li>
+                        <li class="list-group-item"><strong>Password:</strong>********</li>
+                    </ul>
+                </div>
+                <a href="{% url 'user-settings' user.id %}" class="btn btn-warning mt-3">Update</a>
+                <a href="{% url 'delete_user' user.id %}" class="btn btn-danger mt-3">Delete</a>
+            </div>
+        </div>
+    
+    </div>
+</body>
+
+</html>
+{% endblock %}

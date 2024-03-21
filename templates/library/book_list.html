@@ -1,0 +1,90 @@
+{% extends 'home.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book list</title>
+    <style>
+        p {
+            font-size: 1.5em;
+            color: #808080;
+            /* Grayish color */
+        }
+
+        i {
+            color: #3e3e3e
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="raw d-flex mb-3">
+
+            <div class="col-md-6">
+
+                <h1><a class="text-warning nav-link" href="{% url 'book_list_page' %}">Book list:</a></h1>
+                <a href="{% url  'book_add_page' %}" class="btn btn-warning">Add new book</a>
+                
+            </div>
+
+            <div class="col-md-6">
+                <form class="d-flex" action="" method="GET">
+                    <input class="form-control me-2" type="text" placeholder="Search for book" name="search_book_name"
+                        value="{{search}}">
+                    <button class="btn btn-warning" type="submit">Search</button>
+                </form>
+            </div>
+
+        </div>
+        <div class="row">
+
+
+            {% if books %}
+
+
+            {% for book in books %}
+            <div class="col-md-3 mb-3" >
+
+                <a href="{% url 'book_detail_page' book.id %}"  style="text-decoration: none;">
+                <div class="card bg-light border-2" >
+                    <img src="{{book.image.url}}" class="card-img-top" alt="image">
+                    <div class="card-body  text-dark">
+                        <h6 class="card-title mb-3"><strong>Title:</strong> {{book.title}}</h6>
+                        <h6 class="card-title text-dark"><strong>Desription:</strong> {{book.description}}</h6>
+                    </div>
+                    <ul class="list-group  list-group-flush">
+                        <li class="list-group-item bg-light"><strong>Price:</strong> {{book.price}}</li>
+                        <li class="list-group-item bg-light"><strong>Count:</strong> {{book.count}}</li>
+                    </ul>
+                    <div class="card-body ">
+                        <a href="{% url 'book_update_page' book.id %}" class="btn btn-warning">Update</a>
+                        <a href="{% url 'book_delete_page' book.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+                </a>
+            </div>
+            {% endfor %}
+
+
+            {% else %}
+
+            <div>
+                <p>Sorry, nothing was found for <b><i>{{search}}</i></b>.</p>
+            </div>
+
+            {% endif %}
+
+            <br><br>
+            <!-- <h3><a class="btn btn-lg btn-warning mt-4" href="{% url 'home_page_name' %}">Back</a></h3> -->
+        </div>
+
+
+    </div>
+</body>
+
+</html>
+{% endblock %}
